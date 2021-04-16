@@ -19,10 +19,10 @@ public class TestPersonService {
 
     public void addPerson(TestPersonDto person) {
         try {
-            checkIfPersonIsValid(person); // Because there is no ExceptionMapper..
+            checkIfPersonIsValid(person);
             personClient.addPerson(person);
         } catch (Exception e) {
-            log.error("Add Person POST request was unsuccessful, Exception: {}", e.getMessage());
+            log.debug("Add Person was unsuccessful, Exception: {}", e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class TestPersonService {
 
         String[] split = email.split("[.@]");
 
-        if(!firstName.equals(split[0]) || !lastName.equals(split[1]))
+        if (!firstName.equals(split[0]) || !lastName.equals(split[1]))
             throw new OperationException("TestPersonDto is invalid");
     }
 

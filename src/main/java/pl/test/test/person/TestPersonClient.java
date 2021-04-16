@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import pl.test.test.person.dto.TestPersonDto;
@@ -34,11 +33,10 @@ public class TestPersonClient {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> request = new HttpEntity<>(stringPerson, headers);
 
-        ResponseEntity<String> responseEntity;
         try {
             rt.postForEntity(personUri, request, String.class);
         } catch (Exception e) {
-            log.error("AddPerson endpoint has returned a status code different from 200, Person: {}", stringPerson);
+            log.error("AddPerson request has failed, Person: {}", stringPerson);
         }
     }
 }

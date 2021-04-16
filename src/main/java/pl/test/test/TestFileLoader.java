@@ -6,6 +6,7 @@ import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import pl.test.test.exception.OperationException;
 import pl.test.test.person.dto.TestPersonDto;
 import pl.test.test.person.TestPersonMapper;
 import pl.test.test.person.TestPersonService;
@@ -57,6 +58,7 @@ public class TestFileLoader {
             zip4jFile.extractAll(absPath);
         } catch (ZipException e) {
             log.error("Error while unzipping file, Exception: {}", e.getMessage());
+            throw new OperationException("Error while unzipping file");
         }
     }
 
@@ -65,6 +67,7 @@ public class TestFileLoader {
             csvReader = new BufferedReader(new FileReader(absPath + "/" + personFileName));
         } catch (FileNotFoundException e) {
             log.error("Error while reading person file, Exception: {}", e.getMessage());
+            throw new OperationException("Error while reading person file");
         }
     }
 

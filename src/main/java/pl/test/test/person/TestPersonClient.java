@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -37,7 +38,7 @@ public class TestPersonClient {
         HttpEntity<String> request = new HttpEntity<>(stringPerson, headers);
 
         try {
-            rt.postForEntity(personUri, request, String.class);
+            rt.exchange(personUri, HttpMethod.POST, request, String.class);
         } catch (Exception e) {
             log.error("AddPerson request has failed, Person: {}", stringPerson);
         }

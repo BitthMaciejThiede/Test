@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import pl.test.test.person.dto.TestPersonDto;
@@ -31,6 +32,8 @@ public class TestPersonClient {
         String stringPerson = objectMapper.writeValueAsString(person);
 
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
         HttpEntity<String> request = new HttpEntity<>(stringPerson, headers);
 
         try {
